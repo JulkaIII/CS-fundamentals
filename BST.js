@@ -12,7 +12,7 @@ BST.prototype.toString = function(){
 		nodeList.push(data);
 	});
 	return(nodeList);
-}
+};
 
 BST.prototype.BFTraversal = function(visitFunc){
 	var q = new Queue();
@@ -26,6 +26,20 @@ BST.prototype.BFTraversal = function(visitFunc){
 		if(currNode.left != null) q.enqueue(currNode.left);
 		if(currNode.right != null) q.enqueue(currNode.right);
 	}
+};
+
+BST.prototype.inOrderTraversal = function(visitFunc){
+	if(!(this.root==null)){
+		inOrder(this.root, visitFunc);
+	}
+};
+
+function inOrder(root, visitFunc){
+	if(!(root==null)){
+		inOrder(root.left, visitFunc);
+		visitFunc(root.data);
+		inOrder(root.right, visitFunc);
+	}
 }
 
 BST.prototype.insert = function(data){
@@ -35,7 +49,7 @@ BST.prototype.insert = function(data){
 	} else {
 		findInsertion(this.root, n);	
 	}
-}
+};
 
 function findInsertion(root, node){
 	if(node.data < root.data){
