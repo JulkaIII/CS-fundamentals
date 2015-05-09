@@ -16,7 +16,15 @@ nums.insert(37);
 nums.insert(3); 
 nums.insert(99); 
 nums.insert(22); 
-console.log("Inorder traversal: "); 
+console.log("In-order traversal: "); 
 nums.inOrderTraversal(function(data){
+	console.log(data + ' ');
+});
+console.log("Pre-order traversal: "); 
+nums.preOrderTraversal(function(data){
+	console.log(data + ' ');
+});
+console.log("Post-order traversal: "); 
+nums.postOrderTraversal(function(data){
 	console.log(data + ' ');
 });

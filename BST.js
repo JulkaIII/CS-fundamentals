@@ -42,6 +42,34 @@ function inOrder(root, visitFunc){
 	}
 }
 
+BST.prototype.preOrderTraversal = function(visitFunc){
+	if(!(this.root==null)){
+		preOrder(this.root, visitFunc);
+	}
+};
+
+function preOrder(root, visitFunc){
+	if(!(root==null)){
+		visitFunc(root.data);
+		preOrder(root.left, visitFunc);
+		preOrder(root.right, visitFunc);
+	}
+}
+
+BST.prototype.postOrderTraversal = function(visitFunc){
+	if(!(this.root==null)){
+		postOrder(this.root, visitFunc);
+	}
+};
+
+function postOrder(root, visitFunc){
+	if(!(root==null)){
+		postOrder(root.left, visitFunc);
+		postOrder(root.right, visitFunc);
+		visitFunc(root.data);
+	}
+}
+
 BST.prototype.insert = function(data){
 	var n = new TreeNode(data, null, null);
 	if(this.root == null){
