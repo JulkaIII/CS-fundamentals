@@ -104,6 +104,21 @@ BST.prototype.getMax = function(){
 	return current.data;
 };
 
+BST.prototype.find = function(data){
+	var current = this.root;
+	while(current.data != data){
+		if(data < current.data){
+			current = current.left;
+		} else {
+			current = current.right
+		}
+		if(current == null){
+			return null;
+		}
+	}
+	return current;
+};
+
 BST.prototype.toString = function(){
 	var nodeList = Array();
 	
@@ -112,5 +127,9 @@ BST.prototype.toString = function(){
 	});
 	return(nodeList);
 };
+
+BST.prototype.print = function(){
+	console.log(this.root);
+}
 
 module.exports = BST;
