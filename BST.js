@@ -5,14 +5,32 @@ function BST(){
 	this.root = null;
 }
 
-BST.prototype.toString = function(){
-	var nodeList = Array();
-	
-	this.BFTraversal(function(data){
-		nodeList.push(data);
-	});
-	return(nodeList);
+BST.prototype.insert = function(data){
+	var n = new TreeNode(data, null, null);
+	if(this.root == null){
+		this.root = n;
+	} else {
+		findInsertion(this.root, n);	
+	}
 };
+
+function findInsertion(root, node){
+	if(node.data < root.data){
+		if(root.left == null){
+			root.left = node;
+			return true;
+		} else {
+			findInsertion(root.left, node);
+		}
+	} else {
+		if(root.right == null){
+			root.right = node;
+			return true;
+		} else {
+			findInsertion(root.right, node);
+		}
+	}
+}
 
 BST.prototype.BFTraversal = function(visitFunc){
 	var q = new Queue();
@@ -68,33 +86,31 @@ function postOrder(root, visitFunc){
 		postOrder(root.right, visitFunc);
 		visitFunc(root.data);
 	}
-}
-
-BST.prototype.insert = function(data){
-	var n = new TreeNode(data, null, null);
-	if(this.root == null){
-		this.root = n;
-	} else {
-		findInsertion(this.root, n);	
-	}
 };
 
-function findInsertion(root, node){
-	if(node.data < root.data){
-		if(root.left == null){
-			root.left = node;
-			return true;
-		} else {
-			findInsertion(root.left, node);
-		}
-	} else {
-		if(root.right == null){
-			root.right = node;
-			return true;
-		} else {
-			findInsertion(root.right, node);
-		}
+BST.prototype.getMin = function(){
+	var current = this.root;
+	while(!(current.left==null)){
+		current = current.left;
 	}
-}
+	return current.data;
+};
+
+BST.prototype.getMax = function(){
+	var current = this.root;
+	while(!(current.right==null)){
+		current = current.right;
+	}
+	return current.data;
+};
+
+BST.prototype.toString = function(){
+	var nodeList = Array();
+	
+	this.BFTraversal(function(data){
+		nodeList.push(data);
+	});
+	return(nodeList);
+};
 
 module.exports = BST;

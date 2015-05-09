@@ -28,3 +28,8 @@ console.log("Post-order traversal: ");
 nums.postOrderTraversal(function(data){
 	console.log(data + ' ');
 });
+
+var min = nums.getMin();
+console.log("The minimum value of the BST is: " + min);
+var max = nums.getMax();
+console.log("The maximum value of the BST is: " + max);
