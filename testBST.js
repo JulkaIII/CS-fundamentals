@@ -17,24 +17,27 @@ nums.insert(3);
 nums.insert(99); 
 nums.insert(22); 
 nums.print();
-console.log("In-order traversal: "); 
-nums.inOrderTraversal(function(data){
-	console.log(data + ' ');
-});
-console.log("Pre-order traversal: "); 
-nums.preOrderTraversal(function(data){
-	console.log(data + ' ');
-});
-console.log("Post-order traversal: "); 
-nums.postOrderTraversal(function(data){
-	console.log(data + ' ');
-});
+//console.log("In-order traversal: "); 
+//nums.inOrderTraversal(function(data){
+//	console.log(data + ' ');
+//});
+//console.log("Pre-order traversal: "); 
+//nums.preOrderTraversal(function(data){
+//	console.log(data + ' ');
+//});
+//console.log("Post-order traversal: "); 
+//nums.postOrderTraversal(function(data){
+//	console.log(data + ' ');
+//});
+//
+//var min = nums.getMin();
+//console.log("The minimum value of the BST is: " + min);
+//var max = nums.getMax();
+//console.log("The maximum value of the BST is: " + max);
+//
+//console.log(nums.find(23));
+//
+//console.log(nums.find(36));
 
-var min = nums.getMin();
-console.log("The minimum value of the BST is: " + min);
-var max = nums.getMax();
-console.log("The maximum value of the BST is: " + max);
-
-console.log(nums.find(23));
-
-console.log(nums.find(36));
+nums.remove(16);
+nums.print();
