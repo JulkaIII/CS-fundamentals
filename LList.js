@@ -12,7 +12,10 @@ function LList() {
 
 function find(item){
 	var currNode = this.head;
-	while(!(currNode.next == null) && (currNode.element != item)){
+	while(currNode.element != item){
+		if(currNode.next == null){
+			return false;
+		}
 		currNode = currNode.next;
 	}
 	return currNode;
