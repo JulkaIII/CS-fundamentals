@@ -6,6 +6,7 @@ function Stack() {
 	this.peek = peek;
 	this.length = length;
 	this.clear = clear;
+	this.toString = toString;
 }
 
 function push(element) { 
@@ -13,7 +14,8 @@ function push(element) {
 }
 
 function pop() {
-	return this.dataStore[--this.top];
+	this.top--;
+	return this.dataStore.pop();
 }
 
 function peek() {
@@ -26,6 +28,10 @@ function length() {
 
 function clear() {
 	this.top = 0;
+}
+
+function toString(){
+	return this.dataStore;
 }
 
 module.exports = Stack;
