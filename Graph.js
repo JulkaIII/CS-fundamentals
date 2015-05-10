@@ -1,5 +1,6 @@
 function Graph(v){
 	this.vertices = v;
+	this.vertexList = [];
 	this.edges = 0;
 	this.adjacencyList = [];
 	for(var i =0; i < this.vertices; i++){
@@ -17,6 +18,17 @@ Graph.prototype.addEdge = function(v,w){
 	this.adjacencyList[w].push(v);
 	this.edges++;
 };
+
+//Graph.prototype.showGraph = function(){
+//	for (var i = 0; i < this.vertices; ++i) {
+//		var str = i + " -> ";
+//		for (var j = 0; j < this.vertices; ++j) {
+//			if ((this.adjacencyList[i] != undefined) && (this.adjacencyList[i][j] != undefined)) 
+//				str += this.adjacencyList[i][j] + ' ';
+//		}
+//		console.log(str); 
+//	}
+//};
 
 Graph.prototype.showGraph = function(){
 	for (var i = 0; i < this.vertices; ++i) {
@@ -38,9 +50,8 @@ Graph.prototype.dfs = function(s, visitFunc){
 	stack.push(s);
 	while(stack.length > 0){
 		var v = stack.pop();
-		if(v != undefined){
-			visitFunc(v);
-		}
+		visitFunc(this.vertexList[v]);
+		console.log(this.vertexList[v]);
 		for( var w = 0; w < this.adjacencyList.length; w++){
 			if(!this.visited[w]){
 				this.visited[w] = true;
@@ -87,6 +98,16 @@ Graph.prototype.pathTo = function(v){
 
 Graph.prototype.hasPathTo = function(v) { 
 	return this.visited[v];
+};
+
+Graph.prototype.topSort = function(){
+	var thisClass = this;
+	var vertexStack = [];
+	var start = 0;
+	this.dfs(0, function(data){
+		vertexStack.push(data);
+	});	
+	return vertexStack.reverse();
 };
 
 module.exports = Graph;
