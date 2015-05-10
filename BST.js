@@ -197,6 +197,16 @@ function replaceWithSmallest(parent, direction){
 	return current.data;
 };
 
+BST.prototype.getNumNodes = function(){
+	var count = 0;
+	if(!(this.root==null)){
+		preOrder(this.root, function(){
+			count++;
+		});
+	}
+	return count;
+}
+
 BST.prototype.toString = function(){
 	var nodeList = Array();
 	
