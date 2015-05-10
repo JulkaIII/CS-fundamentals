@@ -124,40 +124,78 @@ BST.prototype.find = function(data){
 };
 
 BST.prototype.remove = function(data){
-	removeNode(this.root, data);
-}
-
-//function removeNode(node, data){
-//	if(node.data = data){
-//		
-//	}
-//}
-
-function removeNode(node, data){
-	if(node == null){
-		return null;
-	}
-	if(data == node.data){
-		if(node.left == null && node.right == null){
-			return null;
-		}	
-		if(node.left == null){
-			return node.right;
-		}
-		if(node.right == null){
-			return node.left;
-		}	
-		var tempNode = getSmallest(node.right);
-		node.data = tempNode.data;
-		node.right = removeNode(node.right, tempNode.data);
-		return node;
-	} else if (data < node.data){
-		node.left = removeNode(node.left, data);
+	if(this.root.data == data){
+		removeNode(this.root, null);
 	} else {
-		node.right = removeNode(node.right, data);
-		return node;
+		findNodeToRemove(this.root, data);
 	}
 }
+
+function findNodeToRemove(root, data){
+	if(!(root.left == null) && root.left.data == data){
+		removeNode(root.left, root, 'left');
+		return true;
+	} 
+	
+	if(!(root.right == null) && root.right.data == data){
+		removeNode(root.right, root, 'right');
+		return true;
+	} 
+	
+	if(data < root.data ){
+		if(!(root.left == null)){
+			findNodeToRemove(root.left, root);
+		} else {
+			return false;
+		}
+	}
+	
+	if(data > root.data ){
+		if(!(root.right == null)){
+			findNodeToRemove(root.right, root);
+		} else {
+			return false;
+		}
+	}
+}
+
+function removeNode(node, parent, childDirection){
+	if(node.left == null && node.right == null){
+		parent[childDirection] = null;
+		return true;
+	}
+	
+	if(node.left == null && !(node.right == null)){
+		parent[childDirection] = node.right;
+		return true;
+	}
+	
+	if(node.right == null && !(node.left == null)){
+		parent[childDirection] = node.left;
+		return true;
+	}
+	
+	if(!(node.left == null) && !(node.right == null)){
+		node.data = replaceWithSmallest(node, 'right');
+		return true;
+	}
+}
+
+function replaceWithSmallest(parent, direction){
+	var current = parent[direction];
+	//if we already have the smallest node
+	if(!(current.left == null)){
+		parent[direction] = null;
+		return current.data;
+	}
+	
+	while(!(current.left==null)){
+		parent = current;
+		current = current.left;
+	}
+	parent.left = null;
+	return current.data;
+};
 
 BST.prototype.toString = function(){
 	var nodeList = Array();

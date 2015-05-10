@@ -39,5 +39,6 @@ nums.print();
 //
 //console.log(nums.find(36));
 
-nums.remove(16);
+nums.remove(99);
+console.log('After removed 16');
 nums.print();
