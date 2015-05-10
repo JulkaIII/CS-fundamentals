@@ -10,3 +10,8 @@ g.bfs(0, function(v){
 	console.log('visited vertex: ' + v);
 });
 
+var vertex = 4;
+var paths = g.pathTo(vertex); 
+console.log(paths);
+
+

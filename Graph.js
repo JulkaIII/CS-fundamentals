@@ -5,6 +5,11 @@ function Graph(v){
 	for(var i =0; i < this.vertices; i++){
 		this.adjacencyList[i] = [];
 	}
+	this.edgeTo = [];
+	this.visited = [];
+	for(var i = 0; i<this.vertices; i++){
+		this.visited[i] = false;
+	}
 }
 
 Graph.prototype.addEdge = function(v,w){
@@ -25,12 +30,11 @@ Graph.prototype.showGraph = function(){
 };
 
 Graph.prototype.dfs = function(s, visitFunc){
-	var marked = [];
-	for(var i = 0; i<this.vertices; i++){
-		marked[i] = false;
-	}
+	this.visited.forEach(function(element){
+		element = false;
+	});
 	var stack = [];
-	marked[s] = true;
+	this.visited[s] = true;
 	stack.push(s);
 	while(stack.length > 0){
 		var v = stack.pop();
@@ -38,8 +42,8 @@ Graph.prototype.dfs = function(s, visitFunc){
 			visitFunc(v);
 		}
 		for( var w = 0; w < this.adjacencyList.length; w++){
-			if(!marked[w]){
-				marked[w] = true;
+			if(!this.visited[w]){
+				this.visited[w] = true;
 				stack.push(w);
 			}
 		}
@@ -47,12 +51,11 @@ Graph.prototype.dfs = function(s, visitFunc){
 };
 
 Graph.prototype.bfs = function(s, visitFunc){
-	var marked = [];
-	for(var i = 0; i<this.vertices; i++){
-		marked[i] = false;
-	}
+	this.visited.forEach(function(element){
+		element = false;
+	});
 	var queue = [];
-	marked[s] = true;
+	this.visited[s] = true;
 	queue.push(s);
 	while(queue.length > 0){
 		var v = queue.shift();
@@ -60,12 +63,30 @@ Graph.prototype.bfs = function(s, visitFunc){
 			visitFunc(v);
 		}
 		for( var w = 0; w < this.adjacencyList.length; w++){
-			if(!marked[w]){
-				marked[w] = true;
+			if(!this.visited[w]){
+				this.visited[w] = true;
+				this.edgeTo[w] = v;
 				queue.push(w);
 			}
 		}
 	}
-}
+};
+
+Graph.prototype.pathTo = function(v){
+	var source = 0;
+	if(!this.hasPathTo(v)){
+		return undefined;
+	}
+	var path = [];
+	for (var i=v; i != source; i = this.edgeTo[i]){
+		path.push(i);
+	}
+	path.push(v);
+	return path;
+};
+
+Graph.prototype.hasPathTo = function(v) { 
+	return this.visited[v];
+};
 
 module.exports = Graph;
