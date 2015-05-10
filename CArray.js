@@ -1,7 +1,8 @@
 function CArray(numElements){
 	this.dataStore = [];
 	this.pos = 0;
-	for (var i = 0; i < numElements; ++i) { 
+	this.numElements = numElements;
+	for (var i = 0; i < this.numElements; ++i) { 
 		this.dataStore[i] = i;
 	}
 }
